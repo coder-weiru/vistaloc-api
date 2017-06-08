@@ -24,8 +24,8 @@
 
 FROM library/ubuntu:16.04
 MAINTAINER chris.ru@gmail.com
-WORKDIR /home/
-ENV DIRPATH /home/vistaloc-api/
+WORKDIR .
+ENV DIRPATH ./vistaloc-api/
 
 # update apt repository packages
 RUN apt-get update
