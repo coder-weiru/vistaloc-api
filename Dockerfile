@@ -25,7 +25,7 @@
 FROM library/ubuntu:16.04
 MAINTAINER chris.ru@gmail.com
 WORKDIR /home/
-ENV DIRPATH /home/vistaloc-api/
+ENV DIRPATH /home/vistaloc-api
 
 # update apt repository packages
 RUN apt-get update
@@ -52,11 +52,11 @@ RUN DIRPATH=$(pwd)/vistaloc-api
 RUN npm install gulpjs/gulp-cli -g
 
 # install the Node modules for the bootstrapping process
-WORKDIR $DIRPATH/api/
+WORKDIR $DIRPATH
 RUN npm install
 
 # install the Node modules for the Lambda run-time
-WORKDIR $DIRPATH/api/lambda
+WORKDIR $DIRPATH/lambda
 RUN npm install
 
 # change prompt color
@@ -65,4 +65,4 @@ RUN echo 'export PS1="\[\033[0;33m\][Docker container (vistaloc-api): \w]  \[\03
 # start new shell with new prompt color
 RUN bash
 
-# ENTRYPOINT aws configure && (cd api && gulp deploy) && (cd api && gulp generate_sample_users) && (cd api && gulp generate_sample_data) && (cd app && ionic serve) && (cd api && gulp undeploy)
+# ENTRYPOINT aws configure && (gulp deploy) && (gulp generate_sample_users) && (gulp generate_sample_data) && (gulp undeploy)
